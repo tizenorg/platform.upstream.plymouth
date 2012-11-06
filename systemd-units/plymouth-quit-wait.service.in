@@ -1,6 +1,7 @@
 [Unit]
 Description=Wait for Plymouth Boot Screen to Quit
 After=rc-local.service plymouth-start.service systemd-user-sessions.service
+Conflicts=graphical.target
 
 [Service]
 ExecStart=-@PLYMOUTH_CLIENT_DIR@/plymouth --wait
