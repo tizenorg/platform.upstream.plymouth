@@ -13,24 +13,6 @@ Group:          System/Base
 Url:            http://freedesktop.org/software/plymouth/releases
 Source0:        %{name}-%{version}.tar.bz2
 Source1:        boot-duration
-# PATCH-OPENSUSE -- Add line numbers to tracing output
-Patch2:         plymouth-trace-lines
-# PATCH-OPENSUSE -- Handle correctly multiple displays with different sizes
-Patch3:         plymouth-fix-window-size
-# PATCH-OPENSUSE -- Ensure graphical.target is conflicting with plymouth-wait-quit.service
-Patch4:         stop-graphical.patch
-# PATCH-FIX-UPSTREAM -- Create targets for plymouth systemd services
-Patch6:         plymouth-systemd-target.patch
-# PATCH-OPENSUSE -- Change udevadm path
-Patch7:         plymouth-udevadm-path.patch
-# PATCH-OPENSUSE -- Remove tag not understood by systemd v44
-Patch8:         systemd-no-warning.patch
-# PATCH-FIX-UPSTREAM -- Recognize quotes often used in sysconfig-style files
-Patch9:         0001-ply-text-progress-bar-strip-quotes-if-present.patch
-# PATCH-FIX-UPSTREAM -- Fix systemd service file
-Patch11:        plymouth-fix-systemd-service.patch
-Patch12:	tizen.patch
-Patch13:	systemd_path.patch
 BuildRequires:  automake
 BuildRequires:  kernel-headers
 BuildRequires:  libtool
@@ -261,16 +243,6 @@ plugin.
 
 %prep
 %setup -q
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch6 -p1
-%patch11 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch12 -p1
-%patch13 -p1
 
 # replace builddate with patch0date
 sed -i "s/__DATE__/\"$(stat -c %y %{_sourcedir}/%{name}.changes)\"/" src/main.c
