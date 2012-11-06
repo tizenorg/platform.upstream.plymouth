@@ -1,0 +1,24 @@
+Index: plymouth-0.8.6.1/systemd-units/plymouth-quit-wait.service.in
+===================================================================
+--- plymouth-0.8.6.1.orig/systemd-units/plymouth-quit-wait.service.in
++++ plymouth-0.8.6.1/systemd-units/plymouth-quit-wait.service.in
+@@ -1,6 +1,7 @@
+ [Unit]
+ Description=Wait for Plymouth Boot Screen to Quit
+ After=rc-local.service plymouth-start.service systemd-user-sessions.service
++Conflicts=graphical.target
+ 
+ [Service]
+ ExecStart=-@PLYMOUTH_CLIENT_DIR@/plymouth --wait
+Index: plymouth-0.8.6.1/systemd-units/plymouth-quit.service.in
+===================================================================
+--- plymouth-0.8.6.1.orig/systemd-units/plymouth-quit.service.in
++++ plymouth-0.8.6.1/systemd-units/plymouth-quit.service.in
+@@ -1,6 +1,7 @@
+ [Unit]
+ Description=Terminate Plymouth Boot Screen
+ After=rc-local.service plymouth-start.service systemd-user-sessions.service
++Conflicts=graphical.target
+ 
+ [Service]
+ ExecStart=-@PLYMOUTH_CLIENT_DIR@/plymouth quit
