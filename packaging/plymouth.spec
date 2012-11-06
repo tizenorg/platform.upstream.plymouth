@@ -276,7 +276,7 @@ plugin.
 sed -i "s/__DATE__/\"$(stat -c %y %{_sourcedir}/%{name}.changes)\"/" src/main.c
 
 # Change the default theme
-sed -i -e 's/fade-in/openSUSE/g' src/plymouthd.defaults
+sed -i -e 's/fade-in/tizen/g' src/plymouthd.defaults
 
 %build
 autoreconf -fiv
@@ -330,9 +330,6 @@ if [ $1 -eq 0 ]; then
     [ -x /bin/systemctl ] && /bin/systemctl daemon-reload >/dev/null 2>&1 || :
 fi
 
-%post scripts 
-
-%postun scripts 
 
 %post -n libply-boot-client -p /sbin/ldconfig
 
