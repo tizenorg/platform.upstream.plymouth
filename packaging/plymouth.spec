@@ -7,10 +7,10 @@ Name:           plymouth
 #Version:        %{tarversion}_git%{patchversion}
 Version:        0.8.6.1
 Release:        0
-License:        GPL-2.0+
 Summary:        Graphical Boot Animation and Logger
-Url:            http://freedesktop.org/software/plymouth/releases
+License:        GPL-2.0+
 Group:          System/Base
+Url:            http://freedesktop.org/software/plymouth/releases
 Source0:        %{name}-%{version}.tar.bz2
 Source1:        boot-duration
 # PATCH-OPENSUSE -- Add line numbers to tracing output
@@ -29,14 +29,14 @@ Patch8:         systemd-no-warning.patch
 Patch9:         0001-ply-text-progress-bar-strip-quotes-if-present.patch
 # PATCH-FIX-UPSTREAM -- Fix systemd service file
 Patch11:        plymouth-fix-systemd-service.patch
-Patch12:        tizen.patch
-Patch13:        systemd_path.patch
+Patch12:	tizen.patch
+Patch13:	systemd_path.patch
 BuildRequires:  automake
 BuildRequires:  kernel-headers
 BuildRequires:  libtool
 BuildRequires:  xz
-BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(systemd)
+BuildRequires:  pkgconfig(libdrm)
 %ifarch %ix86 x86_64
 BuildRequires:  pkgconfig(libdrm_intel)
 %endif
@@ -88,15 +88,16 @@ Summary:        Libraries and headers for writing Plymouth splash plugins
 Group:          Development/Libraries/C and C++
 Requires:       %{name} = %{version}
 Requires:       %{name}-x11-renderer = %{version}
-Requires:       libply = %{version}
 Requires:       libply-boot-client = %{version}
 Requires:       libply-splash-core = %{version}
 Requires:       libply-splash-graphics = %{version}
+Requires:       libply = %{version}
 Requires:       pkgconfig
 
 %description devel
 This package contains the libply and libplybootsplash libraries
 and headers needed to develop 3rd party splash plugins for Plymouth.
+
 
 %package x11-renderer
 Summary:        Plymouth X11 renderer
@@ -136,9 +137,9 @@ graphical boot splashes using pango and cairo.
 %package plugin-fade-throbber
 Summary:        Plymouth "Fade-Throbber" plugin
 Group:          System/Base
-Requires:       libply = %{version}
 Requires:       libply-splash-core = %{version}
 Requires:       libply-splash-graphics = %{version}
+Requires:       libply = %{version}
 
 %description plugin-fade-throbber
 This package contains the "Fade-In" boot splash plugin for
@@ -149,9 +150,9 @@ while other images pulsate around during system boot up.
 Summary:        Plymouth "Throbgress" plugin
 Group:          System/Base
 Requires:       %{name}-plugin-label = %{version}
-Requires:       libply = %{version}
 Requires:       libply-splash-core = %{version}
 Requires:       libply-splash-graphics = %{version}
+Requires:       libply = %{version}
 
 %description plugin-throbgress
 This package contains the "throbgress" boot splash plugin for
@@ -163,9 +164,9 @@ the screen.
 Summary:        Plymouth "space-flares" plugin
 Group:          System/Base
 Requires:       %{name}-plugin-label = %{version}
-Requires:       libply = %{version}
 Requires:       libply-splash-core = %{version}
 Requires:       libply-splash-graphics = %{version}
+Requires:       libply = %{version}
 
 %description plugin-space-flares
 This package contains the "space-flares" boot splash plugin for
@@ -174,9 +175,9 @@ Plymouth. It features a corner image with animated flares.
 %package plugin-two-step
 Summary:        Plymouth "two-step" plugin
 Group:          System/Base
-Requires:       libply = %{version}
 Requires:       libply-splash-core = %{version}
 Requires:       libply-splash-graphics = %{version}
+Requires:       libply = %{version}
 Requires:       plymouth-plugin-label
 
 %description plugin-two-step
@@ -188,9 +189,9 @@ short, fast one-shot animation.
 %package plugin-script
 Summary:        Plymouth "script" plugin
 Group:          System/Base
-Requires:       libply = %{version}
 Requires:       libply-splash-core = %{version}
 Requires:       libply-splash-graphics = %{version}
+Requires:       libply = %{version}
 
 %description plugin-script
 This package contains the "script" boot splash plugin for
@@ -203,8 +204,8 @@ Summary:        Plymouth "Fade-In" theme
 Group:          System/Base
 Requires:       %{name}-plugin-fade-throbber = %{version}
 Requires:       plymouth-plugin-label
-BuildArch:      noarch
 Requires(post): %{name}-scripts
+BuildArch:      noarch
 
 %description theme-fade-in
 This package contains the "Fade-In" boot splash theme for
@@ -215,9 +216,9 @@ while stars twinkle around the logo during system boot up.
 Summary:        Plymouth "Spinfinity" theme
 Group:          System/Base
 Requires:       %{name}-plugin-throbgress = %{version}
-BuildArch:      noarch
 Requires(pre):  %{name}
 Requires(post): %{name}-scripts
+BuildArch:      noarch
 
 %description theme-spinfinity
 This package contains the "Spinfinity" boot splash theme for
@@ -228,8 +229,8 @@ spins in the shape of an infinity sign.
 Summary:        Plymouth "Spinner" theme
 Group:          System/Base
 Requires:       %{name}-plugin-two-step = %{version}
-BuildArch:      noarch
 Requires(post): %{name}-scripts
+BuildArch:      noarch
 
 %description theme-spinner
 This package contains the "spinner" boot splash theme for
@@ -239,8 +240,8 @@ Plymouth.
 Summary:        Plymouth "Solar" theme
 Group:          System/Base
 Requires:       %{name}-plugin-space-flares = %{version}
-BuildArch:      noarch
 Requires(post): %{name}-scripts
+BuildArch:      noarch
 
 %description theme-solar
 This package contains the "Solar" boot splash theme for
@@ -250,8 +251,8 @@ Plymouth. It features a blue flamed sun with animated solar flares.
 Summary:        Plymouth "Script" plugin
 Group:          System/Base
 Requires:       %{name}-plugin-script = %{version}
-BuildArch:      noarch
 Requires(post): %{name}-scripts
+BuildArch:      noarch
 
 %description theme-script
 This package contains the "script" boot splash theme for
@@ -307,7 +308,7 @@ rm -f %{buildroot}/%{_bindir}/rhgb-client
 rm -rf %{buildroot}%{_datadir}/plymouth/glow/
 rm -rf %{buildroot}%{_datadir}/plymouth/themes/glow/
 rm -f %{buildroot}%{_libdir}/plymouth/glow.so
-#mv %{buildroot}/%{_lib}/systemd %{buildroot}/%{_libdir}
+#mv %{buildroot}/%_lib/systemd %{buildroot}/%{_libdir}
 
 mkdir -p %{buildroot}%{_localstatedir}/lib/plymouth
 mkdir -p %{buildroot}%{_localstatedir}/run/plymouth
@@ -316,7 +317,7 @@ cp $RPM_SOURCE_DIR/boot-duration %{buildroot}%{_localstatedir}/lib/plymouth
 cp %{buildroot}/%{_datadir}/plymouth/plymouthd.defaults %{buildroot}/%{_sysconfdir}/plymouth/plymouth.conf
 
 %post
-if [ ! -e /.buildenv ]; then
+if [ ! -e /.buildenv ]; then 
    [ -f %{_localstatedir}/lib/plymouth/boot-duration ] || cp -f %{_datadir}/plymouth/default-boot-duration %{_localstatedir}/lib/plymouth/boot-duration
    %{_libexecdir}/plymouth/plymouth-update-initrd
 fi
@@ -329,9 +330,9 @@ if [ $1 -eq 0 ]; then
     [ -x /bin/systemctl ] && /bin/systemctl daemon-reload >/dev/null 2>&1 || :
 fi
 
-%post scripts  -p /sbin/ldconfig
+%post scripts 
 
-%postun scripts  -p /sbin/ldconfig
+%postun scripts 
 
 %post -n libply-boot-client -p /sbin/ldconfig
 
