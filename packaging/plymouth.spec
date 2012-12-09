@@ -5,7 +5,7 @@
 
 Name:           plymouth
 #Version:        %{tarversion}_git%{patchversion}
-Version:        0.8.6.1
+Version:        0.8.8
 Release:        0
 Summary:        Graphical Boot Animation and Logger
 License:        GPL-2.0+
