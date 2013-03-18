@@ -4,12 +4,11 @@
 %define plymouth_initrd_file /boot/initrd-plymouth.img
 
 Name:           plymouth
-#Version:        %{tarversion}_git%{patchversion}
 Version:        0.8.8
 Release:        0
 Summary:        Graphical Boot Animation and Logger
 License:        GPL-2.0+
-Group:          System/Base
+Group:          Base/Startup
 Url:            http://freedesktop.org/software/plymouth/releases
 Source0:        %{name}-%{version}.tar.bz2
 Source1:        boot-duration
@@ -35,14 +34,14 @@ after boot.
 
 %package -n libply-boot-client
 Summary:        Plymouth core library
-Group:          Development/Libraries/C and C++
+Group:          Development/Libraries
 
 %description -n libply-boot-client
 This package contains the libply-boot-client library used by Plymouth.
 
 %package -n libply-splash-core
 Summary:        Plymouth core library
-Group:          Development/Libraries/C and C++
+Group:          Development/Libraries
 
 %description -n libply-splash-core
 This package contains the libply-splash-core library
@@ -50,7 +49,7 @@ used by graphical Plymouth splashes.
 
 %package -n libply-splash-graphics
 Summary:        Plymouth graphics libraries
-Group:          Development/Libraries/C and C++
+Group:          Development/Libraries
 BuildRequires:  libpng-devel
 
 %description -n libply-splash-graphics
@@ -59,7 +58,7 @@ used by graphical Plymouth splashes.
 
 %package -n libply
 Summary:        Plymouth core library
-Group:          Development/Libraries/C and C++
+Group:          Development/Libraries
 Requires:       libply-boot-client = %{version}
 
 %description -n libply
@@ -67,7 +66,7 @@ This package contains the libply library used by Plymouth.
 
 %package devel
 Summary:        Libraries and headers for writing Plymouth splash plugins
-Group:          Development/Libraries/C and C++
+Group:          Development/Libraries
 Requires:       %{name} = %{version}
 Requires:       %{name}-x11-renderer = %{version}
 Requires:       libply-boot-client = %{version}
@@ -83,7 +82,7 @@ and headers needed to develop 3rd party splash plugins for Plymouth.
 
 %package x11-renderer
 Summary:        Plymouth X11 renderer
-Group:          System/Base
+Group:          Base/Startup
 Requires:       %{name} = %{version}
 
 %description x11-renderer
@@ -92,7 +91,7 @@ behavior on environments with a valid DISPLAY.
 
 %package scripts
 Summary:        Plymouth related scripts
-Group:          System/Base
+Group:          Base/Startup
 Requires:       coreutils
 Requires:       cpio
 Requires:       findutils
@@ -106,7 +105,7 @@ the system.
 
 %package plugin-label
 Summary:        Plymouth label plugin
-Group:          System/Base
+Group:          Base/Startup
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(pango) >= 1.21.0
 Requires:       libply-splash-core = %{version}
@@ -118,7 +117,7 @@ graphical boot splashes using pango and cairo.
 
 %package plugin-fade-throbber
 Summary:        Plymouth "Fade-Throbber" plugin
-Group:          System/Base
+Group:          Base/Startup
 Requires:       libply-splash-core = %{version}
 Requires:       libply-splash-graphics = %{version}
 Requires:       libply = %{version}
@@ -130,7 +129,7 @@ while other images pulsate around during system boot up.
 
 %package plugin-throbgress
 Summary:        Plymouth "Throbgress" plugin
-Group:          System/Base
+Group:          Base/Startup
 Requires:       %{name}-plugin-label = %{version}
 Requires:       libply-splash-core = %{version}
 Requires:       libply-splash-graphics = %{version}
@@ -144,7 +143,7 @@ the screen.
 
 %package plugin-space-flares
 Summary:        Plymouth "space-flares" plugin
-Group:          System/Base
+Group:          Base/Startup
 Requires:       %{name}-plugin-label = %{version}
 Requires:       libply-splash-core = %{version}
 Requires:       libply-splash-graphics = %{version}
@@ -156,7 +155,7 @@ Plymouth. It features a corner image with animated flares.
 
 %package plugin-two-step
 Summary:        Plymouth "two-step" plugin
-Group:          System/Base
+Group:          Base/Startup
 Requires:       libply-splash-core = %{version}
 Requires:       libply-splash-graphics = %{version}
 Requires:       libply = %{version}
@@ -170,7 +169,7 @@ short, fast one-shot animation.
 
 %package plugin-script
 Summary:        Plymouth "script" plugin
-Group:          System/Base
+Group:          Base/Startup
 Requires:       libply-splash-core = %{version}
 Requires:       libply-splash-graphics = %{version}
 Requires:       libply = %{version}
@@ -183,7 +182,7 @@ boot splash themes.
 
 %package theme-fade-in
 Summary:        Plymouth "Fade-In" theme
-Group:          System/Base
+Group:          Base/Startup
 Requires:       %{name}-plugin-fade-throbber = %{version}
 Requires:       plymouth-plugin-label
 Requires(post): %{name}-scripts
@@ -196,7 +195,7 @@ while stars twinkle around the logo during system boot up.
 
 %package theme-spinfinity
 Summary:        Plymouth "Spinfinity" theme
-Group:          System/Base
+Group:          Base/Startup
 Requires:       %{name}-plugin-throbgress = %{version}
 Requires(pre):  %{name}
 Requires(post): %{name}-scripts
@@ -209,7 +208,7 @@ spins in the shape of an infinity sign.
 
 %package theme-spinner
 Summary:        Plymouth "Spinner" theme
-Group:          System/Base
+Group:          Base/Startup
 Requires:       %{name}-plugin-two-step = %{version}
 Requires(post): %{name}-scripts
 BuildArch:      noarch
@@ -220,7 +219,7 @@ Plymouth.
 
 %package theme-solar
 Summary:        Plymouth "Solar" theme
-Group:          System/Base
+Group:          Base/Startup
 Requires:       %{name}-plugin-space-flares = %{version}
 Requires(post): %{name}-scripts
 BuildArch:      noarch
@@ -231,7 +230,7 @@ Plymouth. It features a blue flamed sun with animated solar flares.
 
 %package theme-script
 Summary:        Plymouth "Script" plugin
-Group:          System/Base
+Group:          Base/Startup
 Requires:       %{name}-plugin-script = %{version}
 Requires(post): %{name}-scripts
 BuildArch:      noarch
@@ -372,6 +371,7 @@ fi
 
 %files
 %defattr(-, root, root)
+%license COPYING
 %{_libexecdir}/plymouth/*
 %dir %{_datadir}/plymouth
 %dir %{_datadir}/plymouth/themes
