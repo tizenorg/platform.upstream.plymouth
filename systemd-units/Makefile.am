@@ -1,6 +1,7 @@
 systemd_unit_templates =                                                     \
         plymouth-switch-root.service.in                                      \
         plymouth-start.service.in                                            \
+        plymouth-update.service.in                                           \
         plymouth-read-write.service.in                                       \
         plymouth-quit.service.in                                             \
         plymouth-quit-wait.service.in                                        \

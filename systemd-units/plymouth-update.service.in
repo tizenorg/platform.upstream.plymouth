@@ -1,0 +1,12 @@
+[Unit]
+Description=Show Plymouth Update Screen
+DefaultDependencies=no
+After=systemd-vconsole-setup.service systemd-udev-trigger.service
+ConditionKernelCommandLine=!plymouth.enable=0
+
+[Service]
+ExecStart=@PLYMOUTH_DAEMON_DIR@/plymouthd --mode=updates --pid-file=@plymouthruntimedir@/pid --attach-to-session
+ExecStartPost=-/usr/bin/udevadm settle --timeout=30 --exit-if-exists=/sys/class/drm/card0/dev ; /usr/bin/udevadm settle --timeout=30 --exit-if-exists=/sys/class/graphics/fb0/dev ; @PLYMOUTH_CLIENT_DIR@/plymouth show-splash ; @PLYMOUTH_CLIENT_DIR@/plymouth change-mode --updates
+Type=forking
+KillMode=none
+SendSIGKILL=no
