@@ -12,6 +12,7 @@ Group:          Base/Startup
 Url:            http://freedesktop.org/software/plymouth/releases
 Source0:        %{name}-%{version}.tar.bz2
 Source1:        boot-duration
+Source1001: 	plymouth.manifest
 BuildRequires:  automake
 BuildRequires:  kernel-headers
 BuildRequires:  libtool
@@ -242,6 +243,7 @@ plugin.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 # replace builddate with patch0date
 sed -i "s/__DATE__/\"$(stat -c %y %{_sourcedir}/%{name}.changes)\"/" src/main.c
@@ -370,6 +372,7 @@ fi
 %docs_package
 
 %files
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %license COPYING
 %{_libexecdir}/plymouth/*
@@ -400,6 +403,7 @@ fi
 %{_unitdir}/*
 
 %files devel
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{plymouth_libdir}/libply.so
 %{plymouth_libdir}/libply-splash-core.so
@@ -411,22 +415,27 @@ fi
 %{_includedir}/plymouth-1
 
 %files -n libply-boot-client
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{_libdir}/libply-boot-client.so.2*
 
 %files -n libply-splash-core
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{plymouth_libdir}/libply-splash-core.so.2*
 
 %files -n libply-splash-graphics
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{_libdir}/libply-splash-graphics.so.2*
 
 %files -n libply
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{plymouth_libdir}/libply.so.2*
 
 %files scripts
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %dir %{_libexecdir}/plymouth
 %{_sbindir}/plymouth-set-default-theme
@@ -437,18 +446,22 @@ fi
 
 
 %files x11-renderer
+%manifest %{name}.manifest
 #%defattr(-,root,root,-)
 #%{_libdir}/plymouth/renderers/x11*
 
 %files plugin-label
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{_libdir}/plymouth/label.so
 
 %files plugin-fade-throbber
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{_libdir}/plymouth/fade-throbber.so
 
 %files theme-fade-in
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %dir %{_datadir}/plymouth/themes/fade-in
 %{_datadir}/plymouth/themes/fade-in/bullet.png
@@ -458,10 +471,12 @@ fi
 %{_datadir}/plymouth/themes/fade-in/fade-in.plymouth
 
 %files plugin-throbgress
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{_libdir}/plymouth/throbgress.so
 
 %files theme-spinfinity
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %dir %{_datadir}/plymouth/themes/spinfinity
 %{_datadir}/plymouth/themes/spinfinity/box.png
@@ -472,29 +487,35 @@ fi
 %{_datadir}/plymouth/themes/spinfinity/spinfinity.plymouth
 
 %files plugin-space-flares
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{_libdir}/plymouth/space-flares.so
 
 %files theme-spinner
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %dir %{_datadir}/plymouth/themes/spinner
 %{_datadir}/plymouth/themes/spinner/*.*
 
 %files theme-solar
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %dir %{_datadir}/plymouth/themes/solar
 %{_datadir}/plymouth/themes/solar/*.png
 %{_datadir}/plymouth/themes/solar/solar.plymouth
 
 %files plugin-two-step
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{_libdir}/plymouth/two-step.so
 
 %files plugin-script
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{_libdir}/plymouth/script.so
 
 %files theme-script
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %dir %{_datadir}/plymouth/themes/script/
 %{_datadir}/plymouth/themes/script/*.png
