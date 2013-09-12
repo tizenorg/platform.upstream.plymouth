@@ -1,3 +1,9 @@
+* Thu Sep 12 2013 Michael Ikey Doherty <michael.i.doherty@intel.com> accepted/tizen/20130912.154354@d1ef9da
+- drm: drop driver specific renderers
+- resetting manifest requested domain to floor
+- add update systemd service
+- Update package groups
+
 * Mon Mar 18 2013 Anas Nashif <anas.nashif@intel.com> upstream/0.8.8@8813384
 - Update package groups
 
