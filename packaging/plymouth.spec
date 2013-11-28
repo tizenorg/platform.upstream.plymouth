@@ -25,7 +25,9 @@ BuildRequires:  pkgconfig(libdrm_intel)
 BuildRequires:  pkgconfig(libkms)
 Requires:       systemd >= 44
 Requires(post): plymouth-scripts
+%if 0%{!?tizen_platform_noinitrd}
 Requires(post): dracut
+%endif
 
 %description
 Plymouth provides an attractive graphical boot animation in
@@ -292,14 +294,18 @@ cp %{buildroot}/%{_datadir}/plymouth/plymouthd.defaults %{buildroot}/%{_sysconfd
 %post
 if [ ! -e /.buildenv ]; then 
    [ -f %{_localstatedir}/lib/plymouth/boot-duration ] || cp -f %{_datadir}/plymouth/default-boot-duration %{_localstatedir}/lib/plymouth/boot-duration
+%if 0%{!?tizen_platform_noinitrd}
    %{_libexecdir}/plymouth/plymouth-update-initrd
+%endif
 fi
 [ -x /bin/systemctl ] && /bin/systemctl daemon-reload >/dev/null 2>&1 || :
 
 %postun
 if [ $1 -eq 0 ]; then
     rm -f %{_libdir}/plymouth/default.so
+%if 0%{!?tizen_platform_noinitrd}
     rm -f /boot/initrd-plymouth.img
+%endif
     [ -x /bin/systemctl ] && /bin/systemctl daemon-reload >/dev/null 2>&1 || :
 fi
 
@@ -439,7 +445,9 @@ fi
 %defattr(-, root, root)
 %dir %{_libexecdir}/plymouth
 %{_sbindir}/plymouth-set-default-theme
+%if 0%{!?tizen_platform_noinitrd}
 %{_libexecdir}/plymouth/plymouth-update-initrd
+%endif
 #/lib/mkinitrd/scripts/boot-plymouth.sh
 #/lib/mkinitrd/scripts/boot-plymouth.chroot.sh
 #/lib/mkinitrd/scripts/setup-plymouth.sh
