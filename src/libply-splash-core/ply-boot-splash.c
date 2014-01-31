@@ -914,7 +914,7 @@ main (int    argc,
       return errno;
     }
 
-  renderer = ply_renderer_new (NULL, terminal);
+  renderer = ply_renderer_new (NULL, NULL, terminal);
   free(tty_name);
 
   if (!ply_renderer_open (renderer))
